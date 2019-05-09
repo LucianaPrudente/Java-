@@ -1,0 +1,79 @@
+package ativ_luciana;
+import java.awt.FlowLayout;
+import java.awt.Event.*; 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*; 
+public class Ativ extends JFrame implements ActionListener {
+    //Atributos/variaveis 
+    JButton bLimpar; 
+    JTextField tfNome; 
+    JMenu mMenu, mArquivo; 
+    JMenuBar bMenu, mbArquivo; 
+    JMenuItem miSair; 
+    JLabel lNome, lHabilit; 
+    JCheckBox CBxHabilit; 
+    public Ativ () {
+        setLayout(new FlowLayout());
+            //Frame(quadro)
+            setTitle("Frame");
+            setSize(300,200);
+            setVisible(true);    
+//      -------------------
+// Campo de seleção *
+        //lHabilit = new JLabel ("Habilitar campo de texto "); 
+        
+        CBxHabilit = new JCheckBox("Habilitar campo de texto "); 
+        CBxHabilit.addActionListener(this);
+        add(CBxHabilit);  
+//      -------------------  
+//Campo de Texto *
+      lNome = new JLabel("");
+      add(lNome);
+      
+      tfNome = new JTextField (20);
+      tfNome.addActionListener(this);
+      tfNome.setEditable(false);
+      add(tfNome);
+//      -------------------
+//Button
+      bLimpar = new JButton("Limpar"); 
+      bLimpar.addActionListener(this);
+      add(bLimpar); 
+//      -------------------      
+// Menu
+       miSair = new JMenuItem ("Sair");
+       miSair.addActionListener(this);
+       add(miSair);
+       
+       mArquivo = new JMenu("Arquivo"); 
+       mArquivo.add(miSair);
+       
+       bMenu = new JMenuBar();
+       bMenu.add(mArquivo);
+       
+       setJMenuBar(bMenu);
+    }    
+    @Override
+    public void actionPerformed (ActionEvent a){
+        if(a.getSource() == miSair){
+           System.exit(0);
+        }
+        
+        if (a.getSource() == CBxHabilit ){
+            if (CBxHabilit.isSelected()){
+                tfNome.setEditable(true);
+            }else {
+                tfNome.setText("");
+                tfNome.setEditable(false);
+            }
+        }
+            if (a.getSource()== bLimpar){
+                tfNome.setText("");
+            }
+    }
+    public static void main(String[] args) {
+        Ativ aa = new Ativ (); 
+        aa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    } 
+}
